@@ -2,4 +2,5 @@ bin
 logs
 datasets
 Applications of AI.txt
-regression.pygit_command.txt
+regression.py
+git_command.txt
