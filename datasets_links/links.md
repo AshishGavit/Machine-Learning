@@ -1,1 +1,1 @@
-creditcard = https://www.kaggle.com/aniruddhachoudhury/creditcard-fraud-detection
+creditcard_data = https://www.kaggle.com/aniruddhachoudhury/creditcard-fraud-detection
