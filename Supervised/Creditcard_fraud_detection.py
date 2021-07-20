@@ -16,7 +16,7 @@ def data_manipulation():
     print(df.columns)
     
     # step3: get statistical information about the data, use - describe()
-    df2 = df[['Time', 'Amount', 'Class']] # 'Time' and 'Amount' is dependent or features variable -- 'Class' is target variable
+    df2 = df[['Time', 'Amount', 'Class']] # 'Time' and 'Amount' is features variable -- 'Class' is target variable
     print(df2.describe(include='all'))
     
     # step4: Check for missing values
