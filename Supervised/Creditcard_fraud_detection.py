@@ -2,6 +2,11 @@ import pandas as pd # The Pandas module is used for working with tabular data
 # The Matplotlib and seaborn module is used for data visualization.
 import matplotlib.pyplot as plt
 import seaborn as sns
+# Use 'train_test_split' to split the data
+from sklearn.model_selection import train_test_split 
+# the 'sklearn.metrics' module contain metrics that get's the accuacy of our model
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+from sklearn.linear_model import LogisticRegression
 
 # Working with tabular data using pandas
 def data_manipulation():
@@ -82,6 +87,27 @@ def data_visualization(df):
     sns.heatmap(correlation_matrix, vmax = .9, square=True)
     plt.show()
 
+def machine_learning(df):
+    # To start with modelling First we need to split the dataset
+    # 80% → 80% of the data will use to train the model
+    # 20% → 20% to validate the model
+    x = df.drop(['Class'], axis=1) # drop the target variable
+    y = df['Class'] # 'Class' is the target
+    # split the data using 'train_test_split()'
+    xtrain, xtest, ytrain, ytest = train_test_split(x, y, test_size= 0.2, random_state=42)
+
+    # create machine learning model using logistic regression
+    logisticreg = LogisticRegression(solver='lbfgs')
+    logisticreg.fit(xtrain, ytrain) # logisticreg is our model
+
+    # predict the model using predict() 
+    y_pred = logisticreg.predict(xtest) # use the model to predict
+
+    # use the score() to get the accuracy of our model
+    accuracy = logisticreg.score(xtest, ytest)
+    print('Accuracy score of the Logistic regression model: ', accuracy*100,'%')
+    
 if __name__ == '__main__':
     df = data_manipulation()
     data_visualization(df)
+    machine_learning(df)
