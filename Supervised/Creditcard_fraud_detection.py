@@ -33,6 +33,7 @@ def data_manipulation():
     print('percentage of total not fraud transaction in the dataset: ',per_nf)
     print('Number of Fraud: ',fcount)
     print('percentage of total fraud transaction in the dataset: ',per_f)
+    return df2
 
 def fraud_and_notfraud(df):
     nfcount = 0 # do a count for not fraud
@@ -48,5 +49,39 @@ def fraud_and_notfraud(df):
     per_f = (fcount/len(fraudOrNot)*100)
     return nfcount, per_nf, fcount, per_f
 
+def data_visualization(df):
+    # Plot countplot() graph for column 'Class'
+    plt.title('Bar plot for Fraud VS Genuine transactions')
+    sns.countplot(x = 'Class', data = df, palette = 'Blues', edgecolor = 'w')
+    plt.show()
+
+    # Plot graph for columns 'Amount' and 'Time'
+    x = df['Amount']
+    y = df['Time']
+    plt.title('Time Vs amount')
+    plt.plot(x,y)
+    plt.show()
+
+    # Plot graph for distribution of amount
+    plt.figure(figsize=(10,8))
+    plt.title('Amount Distribution')
+    sns.distplot(df['Amount'],color='red')
+    plt.show()
+
+    # find outliers using graph
+    fig, ax = plt.subplots(figsize=(16,8))
+    ax.scatter(df['Amount'],df['Time'])
+    ax.set_xlabel('Amount')
+    ax.set_ylabel('Time')
+    plt.show()
+
+    # Plot a heatmap graph for correlation matrix
+    # Correlation metrics help us to understand the core relation between two attributes.
+    correlation_matrix = df.corr() # corr() method get all the correlation for all the columns
+    plt.figure(figsize=(14,9))
+    sns.heatmap(correlation_matrix, vmax = .9, square=True)
+    plt.show()
+
 if __name__ == '__main__':
-    data_manipulation()
+    df = data_manipulation()
+    data_visualization(df)
